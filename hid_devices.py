@@ -315,7 +315,7 @@ class HIDDeviceRegistry:
                         devs.append({"id": device_id, "instance": device,
                                      "name": name, "hidraw": hidraw, "events": events,
                                      "compatibility_mode": compatibility_mode})
-                        devs_dict[device] = device_id
+                        devs_dict[device] = device
                         if compatibility_mode: devs_in_compatibility_mode.append(device)
             except Exception as exc:
                 print("Error while loading HID device: ", device, ", Error: ", exc,", Skipping.")
