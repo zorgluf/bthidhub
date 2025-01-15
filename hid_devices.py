@@ -332,9 +332,9 @@ class HIDDeviceRegistry:
             del hid_device
 
         for dev_dict in devs:
-            if dev_dict["instance"] not in self.capturing_devices and self.__is_configured_capturing_device(dev_dict["id"]) and dev_dict["instance"] not in devs_in_compatibility_mode:
+            if dev_dict["instance"] not in self.capturing_devices and self.__is_configured_capturing_device(dev_dict["instance"]) and dev_dict["instance"] not in devs_in_compatibility_mode:
                 #create capturing device
-                self.capturing_devices[dev_dict["instance"]] = HIDDevice(dev_dict, self.__get_configured_device_filter(dev_dict["id"]), self.loop, self)
+                self.capturing_devices[dev_dict["instance"]] = HIDDevice(dev_dict, self.__get_configured_device_filter(dev_dict["instance"]), self.loop, self)
 
         recreate_sdp = False
         # Refresh or create config details for currently connected devices.
