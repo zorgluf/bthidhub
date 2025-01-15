@@ -97,7 +97,7 @@ class Main{
                 $.each(response.devices, function (i, device) {
                     var captureText = '';
                     var disable_text = '';
-                    var filterText = '<div class="input-field col s12"><select name="filterSelect" device="'+device.id+'">';
+                    var filterText = '<div class="input-field col s12"><select name="filterSelect" device="'+device.instance+'">';
                     $.each(response.filters, function (j, filter) {
                         var selected = '';
                         if(device.filter == filter.id) selected = ' selected';
