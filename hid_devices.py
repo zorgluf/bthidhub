@@ -339,10 +339,10 @@ class HIDDeviceRegistry:
         recreate_sdp = False
         # Refresh or create config details for currently connected devices.
         for hid_dev in self.capturing_devices.values():
-            dev_config = self.devices_config.get(hid_dev.device_class)
+            dev_config = self.devices_config.get(hid_dev.device_id)
             if not dev_config:
                 dev_config = {}
-                self.devices_config[hid_dev.device_class] = dev_config
+                self.devices_config[hid_dev.device_id] = dev_config
                 recreate_sdp = True
 
             dev_config["descriptor"] = hid_dev.descriptor
@@ -372,7 +372,7 @@ class HIDDeviceRegistry:
 
         # Update the mapped IDs based on latest information.
         for hid_dev in self.capturing_devices.values():
-            config_ids = self.devices_config[hid_dev.device_class]["mapped_ids"]
+            config_ids = self.devices_config[hid_dev.device_id]["mapped_ids"]
             hid_dev.mapped_ids = {k: v.to_bytes() for k,v in config_ids.items()}
         self.devices = devs
 
@@ -421,9 +421,9 @@ class HIDDeviceRegistry:
 
     def get_hid_devices_with_config(self) -> _HIDDevices:
         for device in self.devices:
-            if device["id"] in self.devices_config:
-                device[CAPTURE_ELEMENT] = self.devices_config[device["id"]].get(CAPTURE_ELEMENT, False)
-                if FILTER_ELEMENT in self.devices_config[device["id"]]:
-                    device[FILTER_ELEMENT] =  self.devices_config[device["id"]][FILTER_ELEMENT]
+            if device["instance"] in self.devices_config:
+                device[CAPTURE_ELEMENT] = self.devices_config[device["instance"]].get(CAPTURE_ELEMENT, False)
+                if FILTER_ELEMENT in self.devices_config[device["instance"]]:
+                    device[FILTER_ELEMENT] =  self.devices_config[device["instance"]][FILTER_ELEMENT]
         f = tuple({"id": k, "name": v["name"]} for k,v in FILTERS.items())
         return {"devices": self.devices, "filters": f, "input_devices": self.input_devices}
