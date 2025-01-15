@@ -106,7 +106,7 @@ class Main{
                     filterText+='</select></div>';
                     if(!device.compatibility_mode && device.capture) captureText = ' checked="checked"'
                     if(device.compatibility_mode) disable_text = '  disabled="disabled"';
-                    trHTML += '<tr><td>' + device.name + '</td><td class="capture-check"><p><label><input name="captureCheckbox" device="'+device.id+'" type="checkbox"'+captureText+disable_text+'/><span> </span></label></p></td><td>'+filterText+'</td></tr>';
+                    trHTML += '<tr><td>' + device.name + '</td><td class="capture-check"><p><label><input name="captureCheckbox" device="'+device.instance+'" type="checkbox"'+captureText+disable_text+'/><span> </span></label></p></td><td>'+filterText+'</td></tr>';
                 });
                 $('#hidDevicesList').html(trHTML);
                 $('select').formSelect();
