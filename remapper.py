@@ -11,6 +11,7 @@ from adapter import BluetoothAdapter
 from bluetooth_devices import *
 from hid_devices import *
 from web import Web
+from waveshare_v3 import WaveshareV3, is_waveshare
 
 if __name__ == "__main__":
     sys.stdout = sys.stderr
@@ -24,6 +25,8 @@ if __name__ == "__main__":
     bluetooth_devices.set_hid_devices(hid_devices)
     adapter = BluetoothAdapter(bus, loop, bluetooth_devices, hid_devices)
     web = Web(loop, adapter, bluetooth_devices, hid_devices)
+    if is_waveshare():
+        ui = WaveshareV3(loop)
     loop.run_forever()
 
 
